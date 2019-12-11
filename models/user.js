@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "User",
     {
       line_id: DataTypes.STRING,
+      line_name: DataTypes.STRING,
       note: DataTypes.STRING
     },
     {
