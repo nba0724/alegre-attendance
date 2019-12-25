@@ -32,7 +32,7 @@ if (cluster.isMaster) {
   app.use(express.urlencoded({ extended: true }));
 
   // 静的ファイルのパス
-  app.get(/.*/, function(req, res) {
+  app.get(/.*/, (req, res) => {
     res.sendfile(__dirname + "/dist/index.html");
   });
 
