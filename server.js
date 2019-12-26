@@ -20,7 +20,7 @@ app.use(logger("combined"));
 // 並列化処理の設定
 const numCPUs = os.cpus().length;
 if (cluster.isMaster) {
-  for (var i = 0; i < numCPUs; i++) {
+  for (let i = 0; i < numCPUs; i++) {
     console.log(" worker %d is up!!", i);
     cluster.fork();
   }
@@ -39,7 +39,7 @@ if (cluster.isMaster) {
 
   // 静的ファイルのパス
   app.get(/.*/, (req, res) => {
-    res.sendfile(__dirname + "/dist/index.html");
+    res.sendFile(__dirname + "/dist/index.html");
   });
 
   app.listen(port);
