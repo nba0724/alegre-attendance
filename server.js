@@ -1,7 +1,10 @@
-// express モジュール
+// express本体の設定
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8000;
+
+// express Routerの設定
+const api = require("./server/routers/api");
 
 // クラスターモジュール用
 const cluster = require("cluster");
@@ -30,6 +33,9 @@ if (cluster.isMaster) {
   app.use(helmet());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+
+  // APIルーティング
+  app.use("/_api", api);
 
   // 静的ファイルのパス
   app.get(/.*/, (req, res) => {
