@@ -11,6 +11,12 @@ module.exports = {
       line_id: {
         type: Sequelize.STRING
       },
+      line_name: {
+        type: Sequelize.STRING
+      },
+      line_image_url: {
+        type: Sequelize.STRING
+      },
       note: {
         type: Sequelize.STRING
       },
