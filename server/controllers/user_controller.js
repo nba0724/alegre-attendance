@@ -1,3 +1,4 @@
+const { validationResult } = require("express-validator");
 const models = require("../db/models");
 
 /**
@@ -43,14 +44,21 @@ exports.userReservation = async (req, res) => {
 };
 
 /**
- * show all User list
+ * create User data
  */
-// exports.create = (req, res) => {};
+exports.create = (req, res) => {
+  const errors = validationResult(req);
+  console.log(errors);
+  if (!errors.isEmpty()) {
+    console.log("error");
+  }
+  res.json({ test: "test" });
+};
 
 /**
  * show all User list
  */
-exports.index = (req, res) => {
+exports.update = (req, res) => {
   models.User.findAll().then(users => {
     res.json({ users: users });
   });
