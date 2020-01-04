@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true
     }
   );
-  Schedule.associate = function(models) {
-    // associations can be defined here
+  Schedule.associate = models => {
+    Schedule.hasMany(models.Reservation, { foreignKey: "schedule_id" });
   };
   return Schedule;
 };

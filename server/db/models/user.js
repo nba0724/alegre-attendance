@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "User",
     {
-      line_id: DataTypes.STRING,
+      line_id: { type: DataTypes.STRING, allowNull: false, primaryKey: true },
       line_name: DataTypes.STRING,
       note: DataTypes.STRING
     },
@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true
     }
   );
-  User.associate = function(models) {
-    // associations can be defined here
+  User.associate = models => {
+    User.hasMany(models.Reservation, { foreignKey: "line_id" });
   };
   return User;
 };

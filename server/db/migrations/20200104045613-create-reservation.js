@@ -1,39 +1,25 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("schedules", {
+    return queryInterface.createTable("reservations", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      subject: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      content: {
-        type: Sequelize.TEXT
-      },
-      place: {
-        type: Sequelize.STRING
-      },
-      start_date: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      end_date: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      capacity: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      release_flag: {
+      join_flag: {
         allowNull: false,
         defaultValue: false,
         type: Sequelize.BOOLEAN
+      },
+      line_id: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      schedule_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       created_at: {
         allowNull: false,
@@ -47,7 +33,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("schedules");
+  down: queryInterface => {
+    return queryInterface.dropTable("reservations");
   }
 };
