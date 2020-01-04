@@ -3,8 +3,17 @@ const models = require("../db/models");
 /**
  * show all User list
  */
-exports.index = async (req, res) => {
-  const users = await models.User.findAll();
+exports.indexs = async (req, res) => {
+  const users = await models.User.findAll({
+    raw: true,
+    include: [
+      {
+        model: models.Reservation,
+        required: true
+      }
+    ]
+  });
+
   res.json({ users: users });
 };
 
@@ -14,6 +23,23 @@ exports.index = async (req, res) => {
 exports.show = async (req, res) => {
   const user = await models.User.findByPk(req.params.line_id);
   res.json({ user: user });
+};
+
+/**
+ * index User - Reservation
+ */
+exports.userReservation = async (req, res) => {
+  const users = await models.User.findAll({
+    raw: true,
+    include: [
+      {
+        model: models.Reservation,
+        required: true
+      }
+    ]
+  });
+
+  res.json({ users: users });
 };
 
 /**
