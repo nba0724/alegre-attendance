@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      join_flag: {
+      is_joined: {
         allowNull: false,
         defaultValue: false,
         type: Sequelize.BOOLEAN

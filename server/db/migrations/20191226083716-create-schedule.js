@@ -30,7 +30,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      release_flag: {
+      is_released: {
         allowNull: false,
         defaultValue: false,
         type: Sequelize.BOOLEAN
@@ -47,7 +47,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     return queryInterface.dropTable("schedules");
   }
 };

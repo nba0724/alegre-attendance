@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       start_date: { type: DataTypes.DATE, allowNull: false },
       end_date: { type: DataTypes.DATE, allowNull: false },
       capacity: { type: DataTypes.INTEGER, allowNull: false },
-      release_flag: { type: DataTypes.BOOLEAN, defaultValue: true }
+      is_release: { type: DataTypes.BOOLEAN, defaultValue: true }
     },
     {
       underscored: true
