@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       line_id: { type: DataTypes.STRING, allowNull: false, primaryKey: true },
       line_name: DataTypes.STRING,
-      note: DataTypes.STRING
+      note: DataTypes.TEXT
     },
     {
       underscored: true

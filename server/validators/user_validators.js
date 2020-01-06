@@ -1,6 +1,6 @@
 const { check } = require("express-validator");
 
-module.exports = [
+module.exports.create_user = [
   check("line_id")
     .not()
     .isEmpty()
