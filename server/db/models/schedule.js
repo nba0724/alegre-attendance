@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       place: DataTypes.STRING,
       start_date: { type: DataTypes.DATE, allowNull: false },
       end_date: { type: DataTypes.DATE, allowNull: false },
-      capacity: { type: DataTypes.INTEGER, allowNull: false },
+      capacity: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       is_released: { type: DataTypes.BOOLEAN, defaultValue: true }
     },
     {

@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     "Reservation",
     {
       is_joined: DataTypes.BOOLEAN,
-      line_id: DataTypes.STRING,
-      schedule_id: DataTypes.INTEGER
+      line_id: { type: DataTypes.STRING, allowNull: false },
+      schedule_id: { type: DataTypes.INTEGER, allowNull: false }
     },
     {
       underscored: true
