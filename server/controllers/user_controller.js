@@ -4,16 +4,8 @@ const models = require("../db/models");
 /**
  * show all User list
  */
-exports.indexs = async (req, res) => {
-  const users = await models.User.findAll({
-    raw: true,
-    include: [
-      {
-        model: models.Reservation,
-        required: true
-      }
-    ]
-  });
+exports.index = async (req, res) => {
+  const users = await models.User.findAll();
 
   res.json({ users: users });
 };
