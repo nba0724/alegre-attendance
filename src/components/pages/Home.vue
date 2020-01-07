@@ -1,18 +1,23 @@
 <template>
-  <main>
-    <ContentTitle :title="title" />
-    <CardList :listData="listData" />
-  </main>
+  <v-container>
+    <main>
+      <ContentTitle :title="title" />
+      <CardList :listData="listData" />
+      <Button :item="buttonData" />
+    </main>
+  </v-container>
 </template>
 
 <script>
-import CardList from "@/components/organisms/CardList";
 import ContentTitle from "@/components/organisms/ContentTitle";
+import CardList from "@/components/organisms/CardList";
+import Button from "@/components/molecules/Button";
 export default {
   name: "home",
-  components: { CardList, ContentTitle },
+  components: { CardList, ContentTitle, Button },
   data: () => ({
-    title: "Home",
+    title: "Schedule List",
+    buttonData: { icon: "add", name: "New Schedule" },
     listData: ["aaa", "bbb", "ccc"]
   })
 };
