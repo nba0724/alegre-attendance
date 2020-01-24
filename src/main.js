@@ -6,6 +6,7 @@ import "./registerServiceWorker";
 import vuetify from "./plugins/vuetify";
 
 Vue.config.productionTip = false;
+Vue.prototype.$liff = window.liff;
 
 new Vue({
   router,

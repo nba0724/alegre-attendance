@@ -15,6 +15,9 @@ export default {
   components: {
     Header
   },
-  data: () => ({})
+  data: () => ({}),
+  beforeCreate: async function() {
+    this.$liff.init(process.env.VUE_APP_LIFF_ID);
+  }
 };
 </script>
