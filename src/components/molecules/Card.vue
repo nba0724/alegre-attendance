@@ -12,7 +12,7 @@
         <v-col cols="8">
           <v-card-title>{{ data }}</v-card-title>
           <v-icon>today</v-icon>
-          <v-carde-text>{{ data }}</v-carde-text>
+          <v-carde-text>2019-01-01</v-carde-text>
         </v-col>
       </v-row>
     </v-container>

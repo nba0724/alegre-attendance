@@ -1,16 +1,13 @@
 <template>
-  <v-btn dark :block="imte.block" :color="item.color">
+  <v-btn :color="item.color" dark>
     <v-icon>{{ item.icon }}</v-icon
     >{{ item.name }}</v-btn
   >
 </template>
 
-<scriptt>
+<script>
 export default {
   name: "buton",
-  props: ["item"],
-  methods: {
-    
-  }
+  props: ["item"]
 };
-</scriptt>
+</script>

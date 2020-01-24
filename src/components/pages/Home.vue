@@ -1,10 +1,14 @@
 <template>
   <v-container>
-    <main>
-      <ContentTitle :title="title" />
+    <v-row>
+      <v-col>
+        <ContentTitle :title="title" />
+      </v-col>
+      <v-col cols="auto" class="mt-5"> <Button :item="buttonData"/></v-col>
+    </v-row>
+    <v-row>
       <CardList :listData="listData" />
-      <Button :item="buttonData" />
-    </main>
+    </v-row>
   </v-container>
 </template>
 
@@ -17,8 +21,8 @@ export default {
   components: { CardList, ContentTitle, Button },
   data: () => ({
     title: "Schedule List",
-    buttonData: { icon: "add", name: "New Schedule" },
-    listData: ["aaa", "bbb", "ccc"]
+    buttonData: { icon: "add", name: "", color: "green accent-4" },
+    listData: ["aaaAAAAAAAAAAAAAAAAAAA", "bbb", "ccc"]
   })
 };
 </script>
