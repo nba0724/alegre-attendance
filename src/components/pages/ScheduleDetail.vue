@@ -29,13 +29,13 @@
         <p>参加者 2人・未定 1人</p>
       </v-col>
       <v-col cols="12" no-gutters>
-        <v-badge color="green" overlap>
+        <v-badge color="green accent-4" overlap>
           <v-icon slot="badge" dark small>done</v-icon>
           <v-avatar>
             <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
           </v-avatar>
         </v-badge>
-        <v-badge color="yellow" overlap>
+        <v-badge color="orange darken-1" overlap>
           <v-icon slot="badge" dark small>stop</v-icon>
           <v-avatar>
             <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
@@ -45,7 +45,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-textarea auto-grow label="Detail">aaa</v-textarea>
+        <v-textarea auto-grow label="Detail" readonly>aaa</v-textarea>
       </v-col>
     </v-row>
   </v-container>
@@ -55,14 +55,27 @@
 import ContentTitle from "@/components/organisms/ContentTitle";
 import DateTime from "@/components/organisms/DateTime";
 import Button from "@/components/molecules/Button";
+
+import moment from "moment";
+
 export default {
   name: "home",
   components: { ContentTitle, DateTime, Button },
   data: () => ({
     title: "Schedule",
     buttonData: { icon: "edit", name: "", color: "green accent-4" },
-    startDateTimeData: { dateLabel: "Start Date", timeLabel: "Start Time" },
-    endDateTimeData: { dateLabel: "End Date", timeLabel: "End Time" },
+    startDateTimeData: {
+      dateLabel: "Start Date",
+      date: moment().format("YYYY-MM-DD"),
+      timeLabel: "Start Time",
+      time: moment().format("HH:mm")
+    },
+    endDateTimeData: {
+      dateLabel: "End Date",
+      date: moment().format("YYYY-MM-DD"),
+      timeLabel: "End Time",
+      time: moment().format("HH:mm")
+    },
     subject: "aaaa"
   })
 };

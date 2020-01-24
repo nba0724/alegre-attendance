@@ -36,10 +36,24 @@
 export default {
   name: "dateTime",
   props: ["item"],
-  data: () => ({
-    menu2: false,
-    date: new Date(),
-    time: ""
-  })
+  data() {
+    return {
+      menu2: false
+    };
+  },
+  computed: {
+    date: {
+      get() {
+        return this.item.date;
+      },
+      set() {}
+    },
+    time: {
+      get() {
+        return this.item.time;
+      },
+      set() {}
+    }
+  }
 };
 </script>
