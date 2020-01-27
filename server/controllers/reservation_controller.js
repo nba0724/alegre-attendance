@@ -14,6 +14,8 @@ exports.index = async (req, res) => {
  * show Rservataion
  */
 exports.show = async (req, res) => {
-  const reservation = await models.Reservation.findByPk(req.params.reservation_id);
+  const reservation = await models.Reservation.findByPk(
+    req.params.reservation_id
+  );
   res.json({ reservation: reservation });
 };

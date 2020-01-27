@@ -17,10 +17,10 @@ export default {
   },
   data: () => ({}),
   beforeCreate: async function() {
-    await this.$liff.init({ liffId: process.env.VUE_APP_LIFF_ID });
-    if (!this.$liff.isLoggedIn()) {
-      this.$liff.login();
-    }
+    // await this.$liff.init({ liffId: process.env.VUE_APP_LIFF_ID });
+    // if (!this.$liff.isLoggedIn()) {
+    //   this.$liff.login();
+    // }
   }
 };
 </script>

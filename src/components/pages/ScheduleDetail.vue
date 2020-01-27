@@ -4,24 +4,57 @@
       <v-col>
         <ContentTitle :title="title" />
       </v-col>
-      <v-col cols="auto" class="mt-5"> <Button :item="buttonData"/></v-col>
+      <v-col v-if="isReadOnly" cols="auto" class="mt-5">
+        <Button
+          :item="editButtonData"
+          @button-click="clickEditSaveButton('edit')"
+        />
+      </v-col>
+      <v-col v-if="!isReadOnly" cols="auto" class="mt-5">
+        <Button
+          :item="saveButtonData"
+          @button-click="clickEditSaveButton('save')"
+        />
+      </v-col>
     </v-row>
     <v-row no-gutters>
       <v-col>
-        <v-text-field v-model="subject" label="Subject" readonly></v-text-field>
+        <v-text-field
+          v-model="subject"
+          label="Subject"
+          :readonly="isReadOnly"
+        ></v-text-field>
+      </v-col>
+    </v-row>
+    <v-row no-gutters>
+      <v-col>
+        <v-text-field
+          v-model="place"
+          label="Place"
+          :readonly="isReadOnly"
+        ></v-text-field>
       </v-col>
     </v-row>
     <v-row no-gutters><DateTime :item="startDateTimeData" /> </v-row>
     <v-row no-gutters><DateTime :item="endDateTimeData" /> </v-row>
     <v-row no-gutters>
       <v-col cols="4">
-        <v-btn block color="green accent-4" dark>Going</v-btn>
-      </v-col>
-      <v-col cols="4"
-        ><v-btn block color="orange darken-1" dark>Maybe</v-btn>
+        <Button
+          :item="goingButtonData"
+          @button-click="clickAttendanceButton('going')"
+        />
       </v-col>
       <v-col cols="4">
-        <v-btn block color="blue-grey darken-1" dark>Can't Go</v-btn>
+        <Button
+          :item="maybeButtonData"
+          @button-click="clickAttendanceButton('maybe')"
+        />
+      </v-col>
+      <v-col cols="4">
+        <Button
+          :item="cantGoButtonData"
+          @button-click="clickAttendanceButton('cantgo')"
+        />
       </v-col>
     </v-row>
     <v-row class="mt-5">
@@ -45,7 +78,13 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-textarea auto-grow label="Detail" readonly>aaa</v-textarea>
+        <v-textarea
+          v-model="detail"
+          auto-grow
+          label="Detail"
+          :readonly="isReadOnly"
+        >
+        </v-textarea>
       </v-col>
     </v-row>
   </v-container>
@@ -62,21 +101,121 @@ export default {
   name: "home",
   components: { ContentTitle, DateTime, Button },
   data: () => ({
+    isProcessing: false,
+    isReadOnly: true,
     title: "Schedule",
-    buttonData: { icon: "edit", name: "", color: "green accent-4" },
+    subject: "",
+    place: "",
+    detail: "",
+    editButtonData: {
+      icon: "edit",
+      name: "",
+      color: "green accent-4",
+      block: false
+    },
+    saveButtonData: {
+      icon: "save",
+      name: "",
+      color: "red accent-2",
+      block: false
+    },
+    goingButtonData: {
+      icon: "",
+      name: "Going",
+      color: "green accent-4",
+      block: true
+    },
+    maybeButtonData: {
+      icon: "",
+      name: "Maybe",
+      color: "orange darken-1",
+      block: true
+    },
+    cantGoButtonData: {
+      icon: "",
+      name: "Can't Go",
+      color: "blue darken-2",
+      block: true
+    },
     startDateTimeData: {
       dateLabel: "Start Date",
-      date: moment().format("YYYY-MM-DD"),
       timeLabel: "Start Time",
-      time: moment().format("HH:mm")
+      date: "",
+      time: ""
     },
     endDateTimeData: {
       dateLabel: "End Date",
-      date: moment().format("YYYY-MM-DD"),
       timeLabel: "End Time",
-      time: moment().format("HH:mm")
+      date: "",
+      time: ""
+    }
+  }),
+  mounted: function() {
+    this.initAttendanceInfo();
+    this.setAttendanceButtonColor("");
+  },
+  methods: {
+    initAttendanceInfo() {
+      // 値の取得処理を記載
+      // XXXXXXXXXXXXXXXXXX
+      this.subject = "subject";
+      this.place = "place";
+      this.detail = "detail\r\naaa";
+      this.startDateTimeData.date = moment().format("YYYY-MM-DD");
+      this.startDateTimeData.time = moment().format("HH:mm");
+      this.endDateTimeData.date = moment().format("YYYY-MM-DD");
+      this.endDateTimeData.time = moment()
+        .add(1, "hours")
+        .format("HH:mm");
     },
-    subject: "aaaa"
-  })
+    setAttendanceButtonColor(attendanceStatus) {
+      switch (attendanceStatus) {
+        case "going":
+          this.goingButtonData.color = "green accent-4";
+          this.maybeButtonData.color = "blue-grey";
+          this.cantGoButtonData.color = "blue-grey";
+          break;
+        case "maybe":
+          this.goingButtonData.color = "blue-grey";
+          this.maybeButtonData.color = "orange darken-1";
+          this.cantGoButtonData.color = "blue-grey";
+          break;
+        case "cantgo":
+          this.goingButtonData.color = "blue-grey";
+          this.maybeButtonData.color = "blue-grey";
+          this.cantGoButtonData.color = "blue darken-2";
+          break;
+        default:
+          this.goingButtonData.color = "green accent-4";
+          this.maybeButtonData.color = "orange darken-1";
+          this.cantGoButtonData.color = "blue darken-2";
+      }
+    },
+    clickEditSaveButton(mode) {
+      // 処理中の判定実施
+      if (this.isProcessing) {
+        return;
+      }
+      this.isProcessing = true;
+
+      if (mode === "save") {
+        console.log("save");
+      }
+
+      // 編集モードの場合 → 閲覧モードに変更
+      // 閲覧モードの場合 → 編集モードに変更
+      this.isReadOnly = !this.isReadOnly;
+      this.isProcessing = false;
+    },
+    clickAttendanceButton(attendanceStatus) {
+      // 処理中の判定実施
+      if (this.isProcessing) {
+        return;
+      }
+      this.isProcessing = true;
+      this.setAttendanceButtonColor(attendanceStatus);
+      this.isProcessing = false;
+    }
+  }
 };
 </script>
