@@ -151,11 +151,11 @@ export default {
     }
   }),
   mounted: function() {
-    this.initAttendanceInfo();
-    this.setAttendanceButtonColor("");
+    this.getSchdeuleInfo();
+    this.getAttendanceInfo();
   },
   methods: {
-    initAttendanceInfo() {
+    getSchdeuleInfo() {
       // 値の取得処理を記載
       // XXXXXXXXXXXXXXXXXX
       this.subject = "subject";
@@ -167,7 +167,9 @@ export default {
       this.endDateTimeData.time = moment()
         .add(1, "hours")
         .format("HH:mm");
+      this.setAttendanceButtonColor("");
     },
+    getAttendanceInfo() {},
     setAttendanceButtonColor(attendanceStatus) {
       switch (attendanceStatus) {
         case "going":
